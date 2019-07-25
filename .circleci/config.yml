@@ -48,3 +48,4 @@ jobs:
             sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server.key --username $HUB_SFDX_USER --setdefaultdevhubusername -a hub
             sfdx force --help
             sfdx force:org:create adminEmail=$ORG_EMAIL username=admin_user_$ORG_EMAIL edition=Developer --wait 6
+            sfdx force:data:record:update -s Scratch_Org_Request__c -i $REQUEST_ID -v Status__c="Scratch Org Created" 
