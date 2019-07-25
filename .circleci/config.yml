@@ -20,4 +20,4 @@ jobs:
       - run:
           name: Create hub key
           command: |
-            echo $ORG_Email
+            echo $ORG_EMAIL
