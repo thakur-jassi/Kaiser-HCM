@@ -1,0 +1,73 @@
+<template>
+    
+    <div class="slds-border_bottom slds-border_top slds-theme_shade">
+    <lightning-layout >
+        <lightning-layout-item size="5" class="slds-p-around_x-small">
+            <div class=" slds-text-title_bold">Audience Type</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="6" class="slds-p-around_x-small">
+            <div class=" slds-text-title_bold">Group</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="1" class="slds-p-around_x-small">
+            
+        </lightning-layout-item>
+    </lightning-layout>
+    </div>
+    <template for:each={records} for:item='item'>
+        <div key={item} class="slds-border_bottom">
+            <lightning-layout >
+                <lightning-layout-item size="5" class="slds-p-around_x-small">
+                    <template if:true={item.isAddVisible}>
+                        <lightning-combobox
+                        name="type"
+                        value={item.value}
+                        placeholder="Select Audience Type"
+                        options={options}
+                        onchange={handleChange} 
+                        id={item.id}
+                        variant="label-hidden"></lightning-combobox>
+                    </template>
+                    <template if:true={item.isDelVisible}>
+                        <lightning-combobox
+                        name="type"
+                        value={item.value}
+                        placeholder="Select Audience Type"
+                        options={options}
+                        onchange={handleChange} 
+                        id={item.id}
+                        variant="label-hidden"
+                        disabled></lightning-combobox>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="slds-p-around_x-small">
+                    <c-no-ti5-lookup selection={item.initialSelection} errors={item.errors}
+                        onsearch={handleSearch} onselectionchange={handleSelectionChange}
+                        placeholder="Search" is-multi-entry={isMultiEntry} value-type={value}
+                        is-visible={item.isAddVisible}>
+                    </c-no-ti5-lookup>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="grow"></lightning-layout-item>
+                <lightning-layout-item class="slds-p-around_x-small">
+                    <template if:true={item.isAddVisible}>
+                        <lightning-button-icon-stateful 
+                        icon-name="utility:adduser" 
+                        selected={addState} 
+                        onclick={handleSubmit} 
+                        alternative-text="Add New Row"></lightning-button-icon-stateful>
+                        </template>
+                    <template if:true={item.isDelVisible}>
+                        <lightning-button-icon-stateful 
+                        icon-name="utility:delete" 
+                        selected={addState} 
+                        onclick={handleRemove} 
+                        id={item.id}
+                        alternative-text="Add Audience"></lightning-button-icon-stateful>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+    <div class="slds-border_top slds-theme_shade slds-p-around--x-small">
+        <button type="button" class="slds-button slds-button_brand slds-align_absolute-center" onclick={handleSave}>Save</button>
+    </div>
+</template>
